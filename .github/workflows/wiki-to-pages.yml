@@ -26,46 +26,27 @@ jobs:
 
       - name: Prepare docs
         run: |
-          rm -rf docs
-          mkdir -p docs
-          rsync -a --delete --exclude ".git" wiki/ docs/
-          if [ -f docs/Home.md ]; then
-            cp docs/Home.md docs/index.md
+          mkdir -p doc
+          rsync -a --delete \
+            --exclude ".git" \
+            --exclude "assets/" \
+            --exclude "stylesheets/" \
+            wiki/ doc/
+          if [ -f doc/Home.md ]; then
+            cp doc/Home.md doc/index.md
           fi
 
-      - name: Generate mkdocs config
-        run: |
-          cat > .mkdocs-generated.yml <<'EOF'
-          site_name: Project Wiki
-          docs_dir: docs
-          site_dir: site
-          theme:
-            name: material
-            language: zh
-            features:
-              - navigation.tabs
-              - navigation.top
-              - content.code.copy
-              - search.suggest
-              - search.highlight
-          markdown_extensions:
-            - admonition
-            - attr_list
-            - tables
-            - toc:
-                permalink: true
-          EOF
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Build site with Docker
+        uses: addnab/docker-run-action@v3
         with:
-          python-version: "3.x"
+          image: squidfunk/mkdocs-material:latest
+          options: -v ${{ github.workspace }}:/docs
+          run: |
+            cd /docs
+            mkdocs build --strict
 
-      - name: Install dependencies
-        run: pip install "mkdocs>=1.6" "mkdocs-material>=9.5"
-
-      - name: Build site
-        run: mkdocs build -f .mkdocs-generated.yml --strict
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
