@@ -4,7 +4,7 @@ Welcome to the Custom_OpenWrt-nikki_Rules wiki!
 
 确认你固件的防火墙是firewall4(nftables)才行！
 
-```
+```bash
 opkg list-installed | grep firewall
 ```
 
@@ -33,21 +33,21 @@ opkg list-installed | grep firewall
 <img src="https://github.com/user-attachments/assets/d06accb6-144a-4ed1-8318-12d92f9fe390" style="max-width:100%; height:auto;">
 
 
-> [!TIP]
-> 提示：
-> 图片看不清楚请对图片右键-`在新标签页中打开图像`
+!!! tip
+    提示：
+    图片看不清楚请对图片右键-`在新标签页中打开图像`
 
 
-> [!NOTE]
-> **声明事项：**
->
-> - wiki设置主要面向使用`openwrt主路由拨号`的使用方式，因此wiki的设置仅供参考，实际的设置请以自身的需求出发来更改
-> - wiki设置仅为个人经验的总结性示例，不具权威性，并非 `nikki` 的唯一使用方式。
-> - wiki设置为自用目的，且个人时间有限，只能随缘更新，且鉴于`mihomo内核`更新迭代很快，更多的仍然是去参考`mihomo内核`的wiki:[wiki](https://wiki.metacubex.one/)。
+!!! note
+    **声明事项：**
+    
+    - wiki设置主要面向使用`openwrt主路由拨号`的使用方式，因此wiki的设置仅供参考，实际的设置请以自身的需求出发来更改
+    - wiki设置仅为个人经验的总结性示例，不具权威性，并非 `nikki` 的唯一使用方式。
+    - wiki设置为自用目的，且个人时间有限，只能随缘更新，且鉴于`mihomo内核`更新迭代很快，更多的仍然是去参考`mihomo内核`的wiki:[wiki](https://wiki.metacubex.one/)。
 
 
-> [!WARNING]
-> **使用须知：同[⚠️ 特别声明](https://github.com/Aethersailor/Custom_OpenClash_Rules?tab=readme-ov-file#%EF%B8%8F-%E7%89%B9%E5%88%AB%E5%A3%B0%E6%98%8E)**
+!!! warning
+    **使用须知：同[⚠️ 特别声明](https://github.com/Aethersailor/Custom_OpenClash_Rules?tab=readme-ov-file#%EF%B8%8F-%E7%89%B9%E5%88%AB%E5%A3%B0%E6%98%8E)**
 
 
 <h2>📘 教程索引</h2>

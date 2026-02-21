@@ -29,6 +29,7 @@ theme:
         name: 切换到浅色模式
   features:
     - navigation.path
+    - navigation.top
     - navigation.instant
     - navigation.indexes
     - navigation.sections
@@ -50,6 +51,10 @@ markdown_extensions:
   - admonition
   - attr_list
   - fenced_code
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: true
+  - pymdownx.superfences
   - tables
   - toc:
       permalink: true
