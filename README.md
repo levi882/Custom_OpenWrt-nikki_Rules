@@ -1,8 +1,10 @@
 # Custom_OpenWrt-nikki_Rules
 
-思路还是参考[https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
+思路还是参考 [https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
 
-具体的设置请转到wiki:[https://github.com/levi882/Custom_OpenWrt-nikki_Rules/wiki](https://github.com/levi882/Custom_OpenWrt-nikki_Rules/wiki)
+具体的设置请转到 wiki : [https://github.com/levi882/Custom_OpenWrt-nikki_Rules/wiki](https://github.com/levi882/Custom_OpenWrt-nikki_Rules/wiki)
+
+wiki 的 Pages 页面 : [https://levi882.github.io/Custom_OpenWrt-nikki_Rules/](https://levi882.github.io/Custom_OpenWrt-nikki_Rules/)
 
 ## License
 
