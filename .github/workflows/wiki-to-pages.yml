@@ -1,0 +1,84 @@
+name: Wiki to Pages
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clone wiki repository
+        run: git clone --depth 1 "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
+
+      - name: Prepare docs
+        run: |
+          rm -rf docs
+          mkdir -p docs
+          rsync -a --delete --exclude ".git" wiki/ docs/
+          if [ -f docs/Home.md ]; then
+            cp docs/Home.md docs/index.md
+          fi
+
+      - name: Generate mkdocs config
+        run: |
+          cat > .mkdocs-generated.yml <<'EOF'
+          site_name: Project Wiki
+          docs_dir: docs
+          site_dir: site
+          theme:
+            name: material
+            language: zh
+            features:
+              - navigation.tabs
+              - navigation.top
+              - content.code.copy
+              - search.suggest
+              - search.highlight
+          markdown_extensions:
+            - admonition
+            - attr_list
+            - tables
+            - toc:
+                permalink: true
+          EOF
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install "mkdocs>=1.6" "mkdocs-material>=9.5"
+
+      - name: Build site
+        run: mkdocs build -f .mkdocs-generated.yml --strict
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

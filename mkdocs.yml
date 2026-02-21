@@ -1,0 +1,73 @@
+﻿site_name: Custom OpenWrt Nikki Rules
+site_description: Documentation site generated from the project wiki.
+site_url: https://levi882.github.io/Custom_OpenWrt-nikki_Rules/
+repo_name: "levi882/Custom_OpenWrt-nikki_Rules"
+repo_url: "https://github.com/levi882/Custom_OpenWrt-nikki_Rules"
+
+docs_dir: doc
+site_dir: site
+
+theme:
+  name: material
+  language: zh
+  logo: assets/nikki.png
+  favicon: assets/nikki.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: pink
+      accent: pink
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到深色模式
+    - scheme: slate
+      primary: pink
+      accent: pink
+      toggle:
+        icon: material/weather-night
+        name: 切换到浅色模式
+  features:
+    - navigation.path
+    - navigation.instant
+    - navigation.indexes
+    - navigation.sections
+    - navigation.expand
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - toc.follow
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - fenced_code
+  - tables
+  - toc:
+      permalink: true
+
+exclude_docs: |
+  .git/
+  .github/
+  site/
+  AGENTS.md
+  README.md
+  requirements.txt
+  mkdocs.yml
+
+nav:
+  - 首页: index.md
+  - 文档:
+      - OpenWrt-nikki: "1.Openwrt‐nikki.md"
+      - 可选：SmartDNS 集成: "2.(可选)-与-SmartDNS-集成.md"
+      - 可选：MosDNS 集成: "2.1(可选)-与-MosDNS-集成.md"
+      - 可选：系统优化脚本: "3.(可选)系统优化脚本.md"
+
