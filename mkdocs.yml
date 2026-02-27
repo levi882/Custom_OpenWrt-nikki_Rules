@@ -71,7 +71,7 @@ exclude_docs: |
 nav:
   - 首页: index.md
   - 文档:
-      - OpenWrt-nikki: "1.Openwrt‐nikki.md"
+      - OpenWrt-nikki: "1.Openwrt-nikki.md"
       - 可选：SmartDNS 集成: "2.(可选)-与-SmartDNS-集成.md"
       - 可选：MosDNS 集成: "2.1(可选)-与-MosDNS-集成.md"
       - 可选：系统优化脚本: "3.(可选)系统优化脚本.md"

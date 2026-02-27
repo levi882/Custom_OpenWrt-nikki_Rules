@@ -58,5 +58,5 @@ opkg list-installed | grep firewall
   <tbody>
     <tr>
       <td>OpenWrt-nikki 设置方案</td>
-      <td><a href="https://levi882.github.io/Custom_OpenWrt-nikki_Rules/1.Openwrt%E2%80%90nikki/">查看详细内容</a></td>
+      <td><a href="https://levi882.github.io/Custom_OpenWrt-nikki_Rules/1.Openwrt-nikki/">查看详细内容</a></td>
 </table>
