@@ -8,7 +8,13 @@ Welcome to the Custom_OpenWrt-nikki_Rules wiki!
 opkg list-installed | grep firewall
 ```
 
+```bash
+apk info | grep firewall
+```
+
 ✅：
+
+<img src="https://github.com/user-attachments/assets/0735bf92-dfb5-4032-b979-ec7370ae82e4" style="max-width:100%; height:auto;">
 
 <img src="https://github.com/user-attachments/assets/1f5d3a4c-22a6-44db-ae22-524a15363fc6" style="max-width:100%; height:auto;">
 
