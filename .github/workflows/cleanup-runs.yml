@@ -1,0 +1,23 @@
+name: cleanup-runs
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy Docs to Pages
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: delete
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          retain_days: 3
+          keep_minimum_runs: 0
