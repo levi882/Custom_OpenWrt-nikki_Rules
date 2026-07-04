@@ -3,3 +3,4 @@ wiki/
 wiki_test/
 __pycache__/
 *.pyc
+logs_*/

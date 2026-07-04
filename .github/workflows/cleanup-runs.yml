@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows:
       - Deploy Docs to Pages
+      - Sync Wiki
     types:
       - completed
   workflow_dispatch:

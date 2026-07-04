@@ -100,6 +100,11 @@ def convert_links(content: str) -> str:
 
 def build_sidebar(nav: list) -> str:
     """从 mkdocs.yml 的 nav 配置生成 _Sidebar.md 内容。"""
+    def wiki_name(filename: str) -> str:
+        """index.md → Home, 其他去掉 .md 后缀"""
+        name = filename.replace(".md", "")
+        return "Home" if name == "index" else name
+
     lines = []
     for item in nav:
         if isinstance(item, dict):
@@ -107,17 +112,15 @@ def build_sidebar(nav: list) -> str:
                 lines.append(f"## {section}")
                 if isinstance(subitems, str):
                     # 单页面: 首页: index.md
-                    filename = subitems.replace(".md", "")
-                    lines.append(f"- [{section}](./{filename})")
+                    lines.append(f"- [{section}](./{wiki_name(subitems)})")
                 elif isinstance(subitems, list):
                     # 子页面列表
                     for sub in subitems:
                         if isinstance(sub, dict):
                             for title, file in sub.items():
-                                filename = file.replace(".md", "")
-                                lines.append(f"- [{title}](./{filename})")
+                                lines.append(f"- [{title}](./{wiki_name(file)})")
                         elif isinstance(sub, str):
-                            lines.append(f"- [{sub}](./{sub})")
+                            lines.append(f"- [{sub}](./{wiki_name(sub)})")
                 lines.append("")  # 段落间空行
     return "\n".join(lines)
 
@@ -159,6 +162,9 @@ def main():
         print("[OK] _Footer.md")
 
     # ---- 转换 Markdown 文件 ----
+    # index.md → Home.md (GitHub Wiki 默认首页)
+    RENAME_MAP = {"index.md": "Home.md"}
+
     md_files = sorted(doc_dir.glob("*.md"))
     if not md_files:
         print("Warning: no .md files found")
@@ -168,9 +174,15 @@ def main():
         content = md_file.read_text(encoding="utf-8")
         content = convert_admonitions(content)
         content = convert_links(content)
-        out = wiki_dir / md_file.name
+
+        # 确定输出文件名
+        out_name = RENAME_MAP.get(md_file.name, md_file.name)
+        out = wiki_dir / out_name
         out.write_text(content, encoding="utf-8")
-        print(f"[OK] {md_file.name}")
+        if out_name != md_file.name:
+            print(f"[OK] {md_file.name} -> {out_name}")
+        else:
+            print(f"[OK] {md_file.name}")
 
     print(f"\nDone! {len(md_files)} files -> {wiki_dir}")
 
