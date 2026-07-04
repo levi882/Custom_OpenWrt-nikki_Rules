@@ -1,0 +1,5 @@
+site/
+wiki/
+wiki_test/
+__pycache__/
+*.pyc

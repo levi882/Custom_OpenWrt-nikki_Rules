@@ -1,0 +1,58 @@
+name: Sync Wiki
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wiki-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Convert to Wiki format
+        run: python scripts/convert_to_wiki.py
+
+      - name: Clone Wiki repo
+        env:
+          WIKI_URL: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
+        run: |
+          git clone "$WIKI_URL" wiki_repo
+          # 清空旧的 wiki 文件（保留 .git）
+          find wiki_repo -maxdepth 1 -name '*.md' -delete
+          # 复制转换后的文件
+          cp wiki/*.md wiki_repo/
+          echo "Copied files:"
+          ls -la wiki_repo/
+
+      - name: Push to Wiki
+        run: |
+          cd wiki_repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to push"
+          else
+            git commit -m "docs: sync wiki from mkdocs source"
+            git push
+            echo "Wiki synced successfully!"
+          fi
