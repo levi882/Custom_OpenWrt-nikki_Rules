@@ -28,7 +28,7 @@ apk info | grep firewall
 
 仓库模板地址如下：
 
-[Aethersailor/Custom_OpenClash_Rules/Custom_Clash.ini](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini)
+[Aethersailor/Custom_OpenClash_Rules/Custom_Clash.ini](https://api.asailor.org/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)
 
 # Openwrt-Nikki下载地址：
 
